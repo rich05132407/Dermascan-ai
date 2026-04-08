@@ -25,6 +25,11 @@ BACKEND_DIR = Path(__file__).resolve().parent.parent
 UPLOADS_DIR = BACKEND_DIR / "uploads"
 RESULTS_DIR = BACKEND_DIR / "results"
 
+# StaticFiles exige que el directorio exista en el momento del mount (import-time),
+# no en lifespan. Creamos las carpetas aquí para evitar el RuntimeError en Render.
+UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+
 predictor: Optional[SkinLesionPredictor] = None
 
 
