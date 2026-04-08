@@ -1,27 +1,45 @@
+import os
+import logging
 import uuid
 from pathlib import Path
 from typing import List, Optional, Tuple
 
 import cv2
-from ultralytics import YOLO
 
 from app.schemas import DetectionItem
+
+logger = logging.getLogger("app")
 
 
 class SkinLesionPredictor:
     def __init__(self, weights_path: Path) -> None:
-        if not weights_path.is_file():
-            raise FileNotFoundError(f"No se encontró el modelo: {weights_path}")
         self._weights = weights_path
-        self._model: Optional[YOLO] = None
+        self._model = None
 
     def load(self) -> None:
+        # Lazy import: evita romper el arranque si Ultralytics/PyTorch fallan al importar.
+        try:
+            from ultralytics import YOLO  # type: ignore
+        except Exception:
+            logger.exception("Fallo importando Ultralytics (traceback completo).")
+            raise
+
+        if not self._weights.is_file():
+            raise FileNotFoundError(f"No se encontró el modelo: {self._weights}")
+
+        # Render típicamente no tiene GPU. Forzamos CPU salvo override explícito.
+        device = os.getenv("YOLO_DEVICE", "cpu").strip() or "cpu"
+        if device.lower() == "cpu":
+            os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
+
+        self._device = device
         self._model = YOLO(str(self._weights))
 
     @property
-    def model(self) -> YOLO:
+    def model(self):
         if self._model is None:
-            raise RuntimeError("El modelo no está cargado. Llame a load() al iniciar.")
+            # Intentamos cargar on-demand para no depender del startup.
+            self.load()
         return self._model
 
     def predict_and_save_annotated(
@@ -39,6 +57,7 @@ class SkinLesionPredictor:
 
         yolo_results = self.model.predict(
             source=str(image_path),
+            device=getattr(self, "_device", os.getenv("YOLO_DEVICE", "cpu") or "cpu"),
             verbose=False,
         )
         if not yolo_results:
