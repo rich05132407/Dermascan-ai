@@ -1,4 +1,4 @@
-import { getApiBaseUrl } from "../config/api.js";
+import { API_BASE_URL, getApiBaseUrl } from "../config/api.js";
 
 export function getResultImageUrl(resultImage) {
   if (!resultImage) return null;
@@ -40,7 +40,8 @@ function friendlyHttpMessage(status, detailText) {
 }
 
 export async function postPredict(file) {
-  const base = getApiBaseUrl();
+  // Mantengo getApiBaseUrl por compatibilidad, pero la fuente de verdad es API_BASE_URL.
+  const base = getApiBaseUrl() || API_BASE_URL;
   const url = `${base}/predict`;
 
   console.log("[DermaScan] Enviando a:", url);
