@@ -286,6 +286,12 @@
   white-space: nowrap;
 }
 
+.prediction--result--conclusive .prediction__chip {
+  padding: 0.42rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(6px);
+}
+
 .prediction__chip--ok {
   color: #065f46;
   background: #d1fae5;
@@ -315,6 +321,11 @@
   display: grid;
   gap: 1.35rem;
   padding: 1.35rem;
+}
+
+.prediction--result--conclusive .prediction__dashboard-body {
+  gap: 1.5rem;
+  padding: 1.45rem;
 }
 
 @media (min-width: 900px) {
@@ -477,6 +488,11 @@
     0 14px 42px rgba(15, 23, 42, 0.07);
 }
 
+.prediction--result--conclusive .prediction__result-card {
+  padding: 1.45rem 1.55rem 1.55rem;
+  box-shadow: var(--shadow-card);
+}
+
 .prediction__result-block {
   display: flex;
   flex-direction: column;
@@ -519,6 +535,11 @@
   color: var(--color-text-muted);
 }
 
+.prediction--result--conclusive .prediction__result-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+}
+
 .prediction__result-class {
   margin: 0;
   font-size: 1.28rem;
@@ -527,6 +548,11 @@
   line-height: 1.3;
   color: var(--color-accent);
   word-break: break-word;
+}
+
+.prediction--result--conclusive .prediction__result-class {
+  font-size: 1.34rem;
+  line-height: 1.25;
 }
 
 .prediction__result-sep {
@@ -538,6 +564,17 @@
     transparent 0%,
     var(--color-border) 15%,
     var(--color-border) 85%,
+    transparent 100%
+  );
+}
+
+.prediction--result--conclusive .prediction__result-sep {
+  margin: 1.05rem 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(148, 163, 184, 0.26) 15%,
+    rgba(148, 163, 184, 0.26) 85%,
     transparent 100%
   );
 }
@@ -557,6 +594,11 @@
   border-radius: 999px;
   border: 1px solid transparent;
   line-height: 1.2;
+}
+
+.prediction--result--conclusive .prediction__conf-badge {
+  padding: 0.42rem 1.05rem;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset;
 }
 
 /* Confianza baja en interpretación inconclusa: tono neutro (no alarma / no “rojo peligro”). */
@@ -609,6 +651,11 @@
   color: var(--color-text-muted);
 }
 
+.prediction--result--conclusive .prediction__conf-hint {
+  margin-top: 0.52rem;
+  max-width: 22rem;
+}
+
 .prediction__conf-na-inline {
   color: var(--color-text-muted);
   font-weight: 600;
@@ -629,6 +676,11 @@
   font-size: 0.93rem;
   line-height: 1.62;
   color: var(--color-text-secondary);
+}
+
+.prediction--result--conclusive .prediction__result-note {
+  font-size: 0.94rem;
+  line-height: 1.6;
 }
 
 .prediction__result-note--recommend {
