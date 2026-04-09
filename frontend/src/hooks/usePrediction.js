@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { postPredict } from "../api/predict.js";
 import { isProbablyImageFile, MAX_IMAGE_BYTES } from "../constants/uploadLimits.js";
+import { processImage } from "../utils/processImage.js";
 
 export function usePrediction() {
   const [data, setData] = useState(null);
@@ -80,7 +81,9 @@ export function usePrediction() {
     setData(null);
 
     try {
-      const result = await postPredict(file);
+      // Procesado robusto antes de enviar al backend (JPEG + resize + compresión).
+      const processed = await processImage(file);
+      const result = await postPredict(processed);
       if (!result || typeof result !== "object") {
         throw new Error(
           "La respuesta del análisis no fue válida. Cierra la sesión, vuelve a cargar la página e inténtalo de nuevo.",
