@@ -79,6 +79,28 @@ export function InfoSection() {
               automáticos, no un sustituto del criterio clínico.
             </p>
           </article>
+          <article className="info__card">
+            <span className="info__num" aria-hidden="true">
+              07
+            </span>
+            <h3 className="info__card-title">Qué NO hace esta herramienta</h3>
+            <ul className="info__list">
+              <li>No confirma ni descarta diagnósticos.</li>
+              <li>No sustituye dermatoscopia, biopsia ni exploración clínica.</li>
+              <li>No reemplaza el seguimiento médico ni decisiones terapéuticas.</li>
+            </ul>
+          </article>
+          <article className="info__card">
+            <span className="info__num" aria-hidden="true">
+              08
+            </span>
+            <h3 className="info__card-title">Limitaciones del análisis por imagen</h3>
+            <ul className="info__list">
+              <li>La cámara puede alterar color y contraste; la iluminación cambia el aspecto.</li>
+              <li>Enfoque, movimiento y compresión pueden ocultar detalles finos.</li>
+              <li>Ángulos extremos o distancia inadecuada reducen la interpretabilidad.</li>
+            </ul>
+          </article>
         </div>
         <div className="info__note" role="note" aria-label="Aviso">
           <strong>Importante:</strong> DermaScan AI es una herramienta de apoyo educativo. No constituye diagnóstico,

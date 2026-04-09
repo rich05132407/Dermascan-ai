@@ -248,6 +248,14 @@
   color: #fff;
 }
 
+.prediction--result--neutral .prediction__dashboard-top {
+  background: linear-gradient(135deg, #334155 0%, #1f2937 100%);
+}
+
+.prediction--result--conclusive .prediction__dashboard-top {
+  background: linear-gradient(135deg, var(--color-accent) 0%, #2d4a6f 100%);
+}
+
 .prediction__dashboard-label {
   display: block;
   font-size: 0.68rem;

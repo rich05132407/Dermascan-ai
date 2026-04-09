@@ -149,9 +149,10 @@ export function UploadImage({
           </svg>
         </span>
         <div>
-          <h3 className="upload__title">Subir imagen</h3>
+          <h3 className="upload__title">Imagen para análisis</h3>
           <p className="upload__hint">
-            Selecciona un archivo JPG, PNG o WebP. Revisa la vista previa y pulsa <strong>Analizar imagen</strong>.
+            Selecciona una imagen nítida y bien iluminada. Tras revisar la vista previa, pulsa{" "}
+            <strong>Analizar imagen</strong>.
           </p>
         </div>
       </div>

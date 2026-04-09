@@ -129,7 +129,7 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
   const hallazgosCount = data.has_detections ? data.detections?.length ?? 0 : 0;
 
   return (
-    <div className="prediction prediction--result">
+    <div className={`prediction prediction--result ${inconclusive ? "prediction--result--neutral" : "prediction--result--conclusive"}`}>
       <div className="prediction__dashboard-top">
         <div className="prediction__dashboard-title-block">
           <span className="prediction__dashboard-label">Análisis asistido por IA</span>

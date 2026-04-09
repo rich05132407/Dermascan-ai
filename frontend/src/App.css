@@ -42,6 +42,13 @@
   color: var(--color-accent);
 }
 
+@media (max-width: 640px) {
+  .site-header__brand {
+    gap: 0.5rem;
+    font-size: 1rem;
+  }
+}
+
 .site-header__brand-mark {
   width: 10px;
   height: 10px;
@@ -75,6 +82,19 @@
   text-decoration: none;
   border-radius: 999px;
   transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+@media (max-width: 640px) {
+  .site-header__nav {
+    gap: 0.15rem;
+    font-size: 0.82rem;
+    max-width: min(100%, calc(100vw - 10.1rem));
+    mask-image: linear-gradient(90deg, #000 88%, transparent 100%);
+  }
+
+  .site-header__nav a {
+    padding: 0.4rem 0.65rem;
+  }
 }
 
 .site-header__nav a:hover {
