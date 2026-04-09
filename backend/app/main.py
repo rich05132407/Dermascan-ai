@@ -15,6 +15,7 @@ from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
+from app.clinical_policy import build_predict_response
 from app.predictor import SkinLesionPredictor
 from app.schemas import PredictResponse
 from app.utils import save_upload, validate_image_bytes, validate_image_upload
@@ -142,22 +143,8 @@ async def predict(file: UploadFile = File(...)) -> PredictResponse:
         ) from exc
 
     rel = f"results/{out_name}"
-
-    if not detections:
-        return PredictResponse(
-            has_detections=False,
-            message="No se detectaron lesiones en la imagen.",
-            primary_class=None,
-            primary_confidence=None,
-            detections=[],
-            result_image=rel,
-        )
-
-    return PredictResponse(
-        has_detections=True,
-        message="Detección completada.",
-        primary_class=primary.class_name if primary else None,
-        primary_confidence=primary.confidence if primary else None,
+    return build_predict_response(
         detections=detections,
-        result_image=rel,
+        primary=primary,
+        result_image_rel=rel,
     )

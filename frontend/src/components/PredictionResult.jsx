@@ -1,6 +1,9 @@
 import { getConfidenceLevel, getConfidenceLevelClassKey } from "../utils/confidence.js";
 import "./PredictionResult.css";
 
+/** Debe coincidir con la política conservadora del backend (`clinical_policy`). */
+const INCONCLUSIVE_PRIMARY_CLASS = "sin hallazgos concluyentes";
+
 function SampleReviewIcon() {
   return (
     <svg className="prediction__sample-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -98,8 +101,21 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
     );
   }
 
-  const confLevel = getConfidenceLevel(data.primary_confidence);
-  const confClassKey = getConfidenceLevelClassKey(data.primary_confidence);
+  const inconclusive =
+    data.interpretation_inconclusive === true ||
+    (typeof data.primary_class === "string" &&
+      data.primary_class.trim().toLowerCase() === INCONCLUSIVE_PRIMARY_CLASS);
+
+  let confLevel;
+  let confClassKey;
+  if (inconclusive) {
+    confLevel = "Bajo · no concluyente";
+    confClassKey = "inconclusive";
+  } else {
+    confLevel = getConfidenceLevel(data.primary_confidence);
+    confClassKey = getConfidenceLevelClassKey(data.primary_confidence);
+  }
+
   const hasList = data.detections?.length > 0;
   const hallazgosCount = data.has_detections ? data.detections?.length ?? 0 : 0;
 
@@ -189,9 +205,11 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
                 <span className="prediction__result-label">Estado del análisis</span>
                 <p className="prediction__status-value">Análisis completado</p>
                 <p className="prediction__status-sub">
-                  {data.has_detections
-                    ? "El sistema identificó hallazgos candidatos en la muestra."
-                    : "Sin hallazgos automáticos destacados en esta muestra."}
+                  {inconclusive
+                    ? "La confianza del análisis no alcanza el umbral para una clasificación orientativa concluyente."
+                    : data.has_detections
+                      ? "El sistema identificó hallazgos candidatos en la muestra."
+                      : "Sin hallazgos automáticos destacados en esta muestra."}
                 </p>
               </div>
             </div>
@@ -216,7 +234,9 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
                       {confLevel}
                     </span>
                     <p className="prediction__conf-hint">
-                      Clasificación orientativa basada en el modelo
+                      {inconclusive
+                        ? "Resultado prudente: la conclusión no es concluyente con el umbral configurado."
+                        : "Clasificación orientativa basada en el modelo"}
                     </p>
                   </>
                 ) : (
@@ -239,6 +259,11 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
             <div className="prediction__result-block prediction__result-block--note">
               <span className="prediction__result-label">Resultado orientativo</span>
               <p className="prediction__result-note">{data.message}</p>
+              {inconclusive && (
+                <p className="prediction__result-note prediction__result-note--recommend">
+                  Si existe una lesión visible o preocupación clínica, se recomienda valoración profesional.
+                </p>
+              )}
             </div>
           </div>
         </aside>
@@ -250,6 +275,20 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
           <div className="prediction__details-body">
             <p className="prediction__details-intro">
               Listado de salida del modelo (referencia académica). No sustituye valoración clínica.
+              {inconclusive && data.raw_primary_class != null && (
+                <>
+                  {" "}
+                  Interpretación mostrada arriba es prudente; la mejor detección cruda fue{" "}
+                  <strong>{data.raw_primary_class}</strong>
+                  {data.raw_primary_confidence != null && (
+                    <>
+                      {" "}
+                      (conf. modelo {Math.round(Number(data.raw_primary_confidence) * 1000) / 10}
+                      %).
+                    </>
+                  )}
+                </>
+              )}
             </p>
             <div className="prediction__table-scroll">
               <table className="prediction__table">

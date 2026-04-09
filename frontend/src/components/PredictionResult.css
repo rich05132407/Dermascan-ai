@@ -525,6 +525,16 @@
   line-height: 1.2;
 }
 
+/* Confianza baja en interpretación inconclusa: tono neutro (no alarma / no “rojo peligro”). */
+.prediction__conf-badge--inconclusive {
+  color: #334155;
+  background: #f1f5f9;
+  border-color: rgba(100, 116, 139, 0.35);
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-weight: 700;
+}
+
 .prediction__conf-badge--bajo {
   color: #991b1b;
   background: #fef2f2;
@@ -585,6 +595,14 @@
   font-size: 0.93rem;
   line-height: 1.62;
   color: var(--color-text-secondary);
+}
+
+.prediction__result-note--recommend {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
 }
 
 .prediction__details {
