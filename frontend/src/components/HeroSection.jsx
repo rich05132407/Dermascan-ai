@@ -18,12 +18,11 @@ export function HeroSection({ onCtaClick }) {
             DermaScan AI
           </h1>
           <p className="hero__subtitle">
-            Detección asistida de lesiones cutáneas con inteligencia artificial
+            Apoyo orientativo para evaluación de lesiones cutáneas
           </p>
           <p className="hero__text">
-            Sube una imagen o usa la cámara para obtener un análisis orientativo. La herramienta
-            resalta regiones de interés y estima la clase más probable según el modelo entrenado —
-            pensada como apoyo, no como diagnóstico.
+            Sube una imagen o usa la cámara para obtener un resultado orientativo. El sistema resalta regiones de
+            interés y resume la salida del modelo en un lenguaje prudente. No sustituye la valoración clínica.
           </p>
           <div className="hero__actions">
             <button type="button" className="btn btn--primary" onClick={onCtaClick}>

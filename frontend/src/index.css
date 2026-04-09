@@ -71,6 +71,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Mejora de legibilidad en pantallas pequeñas */
+@media (max-width: 640px) {
+  body {
+    font-size: 15.5px;
+  }
+}
+
 img {
   max-width: 100%;
   height: auto;

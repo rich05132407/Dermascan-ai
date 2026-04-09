@@ -61,8 +61,9 @@ export default function App() {
               Evaluación por imagen
             </h2>
             <p className="detection__intro">
-              Elige una imagen clara de la lesión, revisa la vista previa y pulsa <strong>Analizar imagen</strong>{" "}
-              para obtener un resumen orientativo. No sustituye valoración médica.
+              Selecciona una imagen clara, revisa la vista previa y pulsa <strong>Analizar imagen</strong> para
+              obtener un resultado orientativo. Esta herramienta no sustituye la valoración clínica ni el diagnóstico
+              médico.
             </p>
 
             <div className={`detection__grid ${isMobileLayout ? "detection__grid--mobile" : ""}`}>

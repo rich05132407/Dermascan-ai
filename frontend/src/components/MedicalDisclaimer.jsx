@@ -17,16 +17,22 @@ export function MedicalDisclaimer() {
             </svg>
           </div>
           <h2 id="disclaimer-title" className="disclaimer__title">
-            Aviso médico importante
+            Aviso clínico y uso responsable
           </h2>
           <p className="disclaimer__intro">
-            Lea este apartado antes de interpretar cualquier resultado en pantalla.
+            La información mostrada es orientativa. Interprete el resultado en contexto y priorice la valoración
+            clínica.
           </p>
+          <div className="disclaimer__chips" aria-label="Puntos clave">
+            <span className="disclaimer__chip">No es diagnóstico</span>
+            <span className="disclaimer__chip">Depende de la imagen</span>
+            <span className="disclaimer__chip">Puede fallar</span>
+          </div>
           <ul className="disclaimer__list">
             <li>Esta herramienta no sustituye una consulta médica ni una exploración presencial.</li>
-            <li>No reemplaza el diagnóstico ni el tratamiento indicado por un dermatólogo u otro especialista.</li>
-            <li>Ante cualquier lesión nueva, cambiante o sospechosa, acuda a un profesional de la salud.</li>
-            <li>Los resultados mostrados son orientativos y de apoyo; pueden contener errores.</li>
+            <li>No reemplaza el diagnóstico, seguimiento o tratamiento indicado por un dermatólogo u otro especialista.</li>
+            <li>La calidad de la imagen (luz, enfoque, distancia y encuadre) influye de forma importante en el resultado.</li>
+            <li>Si existe una lesión visible, cambios recientes o preocupación clínica, se recomienda revisión profesional.</li>
           </ul>
         </div>
       </div>

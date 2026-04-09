@@ -11,6 +11,13 @@
   transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition-fast);
 }
 
+@media (max-width: 640px) {
+  .upload {
+    padding: 1.15rem 1.1rem 1.1rem;
+    border-radius: var(--radius-md);
+  }
+}
+
 .upload:hover:not(.upload--disabled) {
   border-color: rgba(13, 148, 136, 0.35);
   box-shadow: var(--shadow);
@@ -84,6 +91,12 @@
   border-radius: var(--radius-md);
   transition: background var(--transition-fast), border-color var(--transition-fast),
     transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+@media (max-width: 640px) {
+  .upload__btn {
+    min-height: 50px;
+  }
 }
 
 .upload__btn--solo {

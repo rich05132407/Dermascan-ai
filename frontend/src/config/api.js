@@ -10,9 +10,11 @@ export const API_BASE_URL = (
 ).replace(/\/$/, "");
 
 // Log temporal para validar qué base URL está usando el build (dev/prod).
-console.log(
-  `[DermaScan] API_BASE_URL=${API_BASE_URL} (mode=${import.meta.env.MODE}, dev=${import.meta.env.DEV}, prod=${import.meta.env.PROD})`,
-);
+if (import.meta.env.DEV) {
+  console.log(
+    `[DermaScan] API_BASE_URL=${API_BASE_URL} (mode=${import.meta.env.MODE}, dev=${import.meta.env.DEV}, prod=${import.meta.env.PROD})`,
+  );
+}
 
 export function getApiBaseUrl() {
   return API_BASE_URL;

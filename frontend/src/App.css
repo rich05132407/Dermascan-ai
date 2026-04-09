@@ -26,6 +26,12 @@
   gap: 1rem;
 }
 
+@media (max-width: 640px) {
+  .site-header__inner {
+    padding: 0.8rem 1rem;
+  }
+}
+
 .site-header__brand {
   display: inline-flex;
   align-items: center;
@@ -90,6 +96,12 @@ main {
   background: linear-gradient(180deg, #f8fafc 0%, var(--color-bg) 100%);
 }
 
+@media (max-width: 640px) {
+  .detection {
+    padding: 2.1rem 1rem 3rem;
+  }
+}
+
 .detection::before {
   content: "";
   position: absolute;
@@ -140,6 +152,13 @@ main {
   font-size: 0.95rem;
   color: var(--color-text-muted);
   line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .detection__intro {
+    margin-bottom: 1.5rem;
+    font-size: 0.92rem;
+  }
 }
 
 .detection__grid {

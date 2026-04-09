@@ -4,6 +4,12 @@
   padding: 3.25rem 1.35rem 4rem;
 }
 
+@media (max-width: 640px) {
+  .hero {
+    padding: 2.6rem 1rem 3.25rem;
+  }
+}
+
 .hero__bg {
   position: absolute;
   inset: 0;
@@ -181,6 +187,13 @@
   text-decoration: none;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast),
     background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+@media (max-width: 640px) {
+  .btn {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+  }
 }
 
 .btn--primary {

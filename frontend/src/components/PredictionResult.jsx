@@ -49,8 +49,11 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
           <div className="prediction__loader-ring" aria-hidden="true" />
           <div className="prediction__loader-core" aria-hidden="true" />
         </div>
-        <p className="prediction__state-title">Procesando análisis</p>
-        <p className="prediction__state-text">Preparando el resumen orientativo…</p>
+        <p className="prediction__state-title">Procesando la imagen</p>
+        <p className="prediction__state-text">
+          Generando un resultado orientativo. Esto puede tardar unos segundos según la conexión y la carga del
+          servidor.
+        </p>
       </div>
     );
   }
@@ -65,11 +68,17 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
           </svg>
         </div>
         <div className="prediction__error-body">
-          <h3 className="prediction__heading">No se pudo realizar el análisis</h3>
-          <p className="prediction__error-msg">{error}</p>
-          <p className="prediction__error-hint">
-            Comprueba la imagen y tu conexión. Puedes intentarlo de nuevo con otra fotografía.
+          <h3 className="prediction__heading">No fue posible completar el análisis</h3>
+          <p className="prediction__error-msg">
+            Inténtalo nuevamente en unos segundos o prueba con otra imagen más nítida y bien iluminada.
           </p>
+          <p className="prediction__error-hint">
+            Si el problema persiste, revisa tu conexión y vuelve a cargar la página.
+          </p>
+          <details className="prediction__error-details">
+            <summary className="prediction__error-summary">Ver detalle técnico</summary>
+            <pre className="prediction__error-pre">{String(error)}</pre>
+          </details>
         </div>
       </div>
     );
@@ -109,7 +118,7 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
   let confLevel;
   let confClassKey;
   if (inconclusive) {
-    confLevel = "Bajo · no concluyente";
+    confLevel = "No concluyente";
     confClassKey = "inconclusive";
   } else {
     confLevel = getConfidenceLevel(data.primary_confidence);
@@ -127,7 +136,9 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
           <h3 className="prediction__dashboard-title">Resumen del análisis</h3>
         </div>
         <div className="prediction__header-badges">
-          <span className="prediction__chip prediction__chip--done">Análisis completado</span>
+          <span className={`prediction__chip ${inconclusive ? "prediction__chip--neutral" : "prediction__chip--done"}`}>
+            {inconclusive ? "No concluyente" : "Completado"}
+          </span>
         </div>
       </div>
 
@@ -203,10 +214,10 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
               </span>
               <div>
                 <span className="prediction__result-label">Estado del análisis</span>
-                <p className="prediction__status-value">Análisis completado</p>
+                <p className="prediction__status-value">{inconclusive ? "Resultado prudente" : "Análisis completado"}</p>
                 <p className="prediction__status-sub">
                   {inconclusive
-                    ? "La confianza del análisis no alcanza el umbral para una clasificación orientativa concluyente."
+                    ? "No se identificaron hallazgos concluyentes con suficiente confianza en esta imagen."
                     : data.has_detections
                       ? "El sistema identificó hallazgos candidatos en la muestra."
                       : "Sin hallazgos automáticos destacados en esta muestra."}
@@ -219,7 +230,7 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
             <div className="prediction__result-block">
               <span className="prediction__result-label">Clase detectada</span>
               <p className="prediction__result-class">
-                {data.primary_class ?? "Sin clase predominante"}
+                {inconclusive ? "Sin hallazgos concluyentes" : data.primary_class ?? "Sin clase predominante"}
               </p>
             </div>
 
@@ -235,7 +246,7 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
                     </span>
                     <p className="prediction__conf-hint">
                       {inconclusive
-                        ? "Resultado prudente: la conclusión no es concluyente con el umbral configurado."
+                        ? "Este resultado no sustituye una valoración clínica."
                         : "Clasificación orientativa basada en el modelo"}
                     </p>
                   </>
@@ -257,11 +268,15 @@ export function PredictionResult({ loading, error, data, sourceImageUrl, hasPend
             <div className="prediction__result-sep" role="presentation" />
 
             <div className="prediction__result-block prediction__result-block--note">
-              <span className="prediction__result-label">Resultado orientativo</span>
-              <p className="prediction__result-note">{data.message}</p>
+              <span className="prediction__result-label">{inconclusive ? "Interpretación" : "Resultado orientativo"}</span>
+              <p className="prediction__result-note">
+                {inconclusive
+                  ? "No se identificaron hallazgos concluyentes con suficiente confianza en esta imagen. Este resultado no sustituye una valoración clínica."
+                  : data.message}
+              </p>
               {inconclusive && (
                 <p className="prediction__result-note prediction__result-note--recommend">
-                  Si existe una lesión visible o preocupación clínica, se recomienda valoración profesional.
+                  Si existe una lesión visible, cambios recientes o preocupación clínica, se recomienda revisión profesional.
                 </p>
               )}
             </div>

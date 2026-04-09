@@ -48,6 +48,27 @@
   text-align: center;
 }
 
+.disclaimer__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 0 0 1.35rem;
+}
+
+.disclaimer__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 999px;
+  color: rgba(226, 232, 240, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .disclaimer__list {
   margin: 0;
   padding: 0;
@@ -77,4 +98,15 @@
 
 .disclaimer__list li:last-child {
   margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .disclaimer {
+    padding: 2.65rem 1rem;
+  }
+
+  .disclaimer__card {
+    padding: 1.6rem 1.15rem 1.6rem;
+    border-radius: var(--radius-md);
+  }
 }

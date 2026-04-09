@@ -44,12 +44,16 @@ export async function postPredict(file) {
   const base = getApiBaseUrl() || API_BASE_URL;
   const url = `${base}/predict`;
 
-  console.log("[DermaScan] Enviando a:", url);
-  console.log("[DermaScan] Archivo:", file?.name, file?.type, file?.size, "bytes");
+  if (import.meta.env.DEV) {
+    console.log("[DermaScan] Enviando a:", url);
+    console.log("[DermaScan] Archivo:", file?.name, file?.type, file?.size, "bytes");
+  }
 
   const formData = new FormData();
   formData.append("file", file);
-  console.log("[DermaScan] FormData contiene campo file:", formData.has("file"));
+  if (import.meta.env.DEV) {
+    console.log("[DermaScan] FormData contiene campo file:", formData.has("file"));
+  }
 
   let res;
   try {
@@ -64,7 +68,9 @@ export async function postPredict(file) {
     );
   }
 
-  console.log("[DermaScan] Respuesta HTTP:", res.status, res.statusText);
+  if (import.meta.env.DEV) {
+    console.log("[DermaScan] Respuesta HTTP:", res.status, res.statusText);
+  }
 
   const text = await res.text();
   let body = null;
