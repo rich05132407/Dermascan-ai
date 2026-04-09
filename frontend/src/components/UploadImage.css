@@ -7,7 +7,7 @@
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-card);
   transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition-fast);
 }
 
@@ -19,7 +19,7 @@
 }
 
 .upload:hover:not(.upload--disabled) {
-  border-color: rgba(13, 148, 136, 0.35);
+  border-color: rgba(13, 148, 136, 0.22);
   box-shadow: var(--shadow);
 }
 

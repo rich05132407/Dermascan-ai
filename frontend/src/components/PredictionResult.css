@@ -4,13 +4,13 @@
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
   transition: box-shadow var(--transition);
 }
 
 .prediction:hover {
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow);
 }
 
 .prediction--state {

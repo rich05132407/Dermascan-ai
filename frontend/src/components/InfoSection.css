@@ -63,14 +63,14 @@
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-card);
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
 
 .info__card:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow);
-  border-color: rgba(13, 148, 136, 0.25);
+  border-color: rgba(13, 148, 136, 0.2);
 }
 
 .info__num {
